@@ -9,12 +9,10 @@
     body{
     background-size: cover;
     background-repeat: no-repeat;
-    
+    padding-bottom: 100px;
+    margin-bottom: 100px;
 }
-    .list-items{
-        overflow-x:hidden;
-        overflow-x:auto;
-    }
+
 .list{
     position: relative;
     top: 5px;
@@ -23,7 +21,7 @@
     width: 400px;
     min-height: 400px;
     padding-bottom: 30px;
-    margin-bottom:200px;
+    margin-bottom: 100px;
 }
 .heading{
     background-image: url("img/head.jpeg");
@@ -115,6 +113,10 @@
     margin-top: 10px;
     margin-left: 5px;
 }
+.list-items{
+    overflow-x: hidden;
+    overflow-x: auto;
+}
 </style>
 <body background="img/bg.jfif">
 <center>
@@ -170,7 +172,7 @@ allStorage();
 
 </center>
 <script>function add_item(){
-    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg' ><h1>Add Item</h1></div><div><h2>Description<h2><input type='text' value='' id='item'><br><h2>Priority</h2><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select></div><br><button type='submit' class='sub' onclick='added()'>Add</button></div>";
+    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2>Description</h2><input type='text' value='' id='item'><h2>Priority<br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
 }
 
 function added(){
