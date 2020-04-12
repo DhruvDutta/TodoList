@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.list{
+    position: relative;
+    top: 5px;
+    border-radius: 30px;
+    background: rgba(0, 0, 0, 0.5);
+    width: 400px;
+    height: 600px;
+}
+.heading{
+    background-image: url("head.jpeg");
+    background-size: 400px;
+    text-align: center;
+    font-family: cursive;
+    border-radius: 30px 30px 0px 0px;
+    background-position: 0px;
+    height: 60px;
+    font-size: 17px;
+
+}
+.plus{
+    position: absolute;
+    top: 500px;
+    left: 300px;
+    height: 60px;
+    border-radius: 30px;
+}
+.add{
+    margin-top: 100px;
+    background: rgba(0,0,0, 0.5);
+    height: 300px;
+    width: 400px;
+    border-radius: 30px;
+}
+.head1{
+    text-align: center;
+    font-family: cursive;
+    background-image: url("add.jpg");
+    border-radius: 30px 30px 0px 0px;
+    background-position: 20px;
+}
+#item{
+    
+    border-radius: 5px;
+    height: 20px;
+    width: 300px;
+}
+#priority{
+    
+    border-radius: 20px;
+    height: 20px;
+    width: 250px;
+}
+#Priority{
+    background-color: wheat;
+    width: 100px;
+    border-radius: 20px;
+}
+.sub{
+    font-size: 20px;
+    border-radius: 10px;
+    background-color: aqua;
+}
+#p{
+    height: 30px;
+    border-radius: 5px;
+    width: 100px;
+}
+.it{
+    margin-top: 10px;
+    text-align: left;
+    background:rgba(0, 0, 0, 0.5);
+    height: 50px;
+}
+#k{
+    text-align: left;
+    font-family: cursive;
+    padding-left: 20px;
+    color: white;
+    font-size: 30px;
+}
+#v{
+    float: right;
+    text-align: center;
+    background: rgba(0,0,0, 0.8);
+    width: 50px;
+    border-radius: 5px;
+    height: 40px;
+    color: white;
+    font-size: 30px;
+    margin-top: 5px;
+}
+#del{
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 10px;
+    margin-left: 5px;
+}
+</style>
+<body background="bg.jfif">
+<center>
+    <div id="main" class="main">
+        
+        <div class="list">
+            
+            <div class="heading">
+                <h1>Your Todo List</h1>
+            </div>
+        
+
+
+            <div id = "list-items" class="list-items">
+
+            </div>
+            
+            
+            <img onclick="add_item()" class="plus" src="plus.png" alt="+" />
+        </div>
+    </div>
+
+<script>
+    
+    function allStorage() {
+
+var values = [],
+    keys = Object.keys(localStorage),
+    i = keys.length;
+    var w ="";
+
+if(i>0){
+    while ( i-- ) {
+        
+        var p = "";
+        if(localStorage.getItem(keys[i])=="h"){
+            var p ="&#8648";
+        }else if(localStorage.getItem(keys[i])=="m"){
+            p="&#8593"
+        }else{
+            p="";
+        }
+        w += `<div class="it"><img id='del'src='del.png' onclick='localStorage.removeItem("${keys[i]}");allStorage();'><span id = "k">${keys.length-i}. ${keys[i]} <span id ='v'> ${p}</div>`;
+    }
+}    document.getElementById("list-items").innerHTML=w;
+
+}
+allStorage();
+</script>
+
+
+
+
+</center>
+<script>function add_item(){
+    document.getElementById("main").innerHTML = "<div class='add'><div class='head1'><h1>Add Item</h1></div><div>Description<br><input type='text' value='' id='item'><br><br><br><label for='p'>Priority</label><br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br><br><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
+}
+
+function added(){
+    var p = document.getElementById("p");
+    var a = p.options[p.selectedIndex].value;
+    localStorage.setItem(document.getElementById("item").value, a);
+    
+    document.getElementById("main").innerHTML ="<div id='main' class='main'><div class='list'><div class='heading'><h1>Your Todo List</h1></div><div id = 'list-items' class='list-items'></div><img onclick='add_item()' class='plus' src='plus.png' alt='+' /></div></div>";
+    allStorage();
+}
+
+</script>
+
+
+</body>
+</html>
