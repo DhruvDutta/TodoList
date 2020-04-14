@@ -44,7 +44,7 @@
 .add{
     margin-top: 100px;
     background: rgba(0,0,0, 0.5);
-    height: 300px;
+    height: 350px;
     width: 400px;
     border-radius: 30px;
 }
@@ -99,7 +99,7 @@
     margin-left: 10px;
     margin-top: 6px;
     color: white;
-    font-size: 20px;
+    font-size: 15px;
     overflow: auto;
 }
 #del{
@@ -111,6 +111,7 @@
 .list-items{
     overflow: hidden;
 }
+
 </style>
 <body background="img/bg.jfif">
 <center>
@@ -134,7 +135,7 @@
     </div>
 
 <script>
-    alert = function(){};
+    
         keys = Object.keys(localStorage);    
         function refresh_all() {
             keys = Object.keys(localStorage),
@@ -151,36 +152,42 @@
                 }else{
                     p = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:grayscale()'>`;
                 }
-                w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. ' + keys[i]} </span></div>`;
-
+                w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. '} </span></div>`;
+                
         }}else{
             w="<br><h1 style='color:white;'>Add Tasks by Clicking the '+' Button";
         }
         document.getElementById("list-items").innerHTML = w;
         for(let j = 0;j<=keys.length;j++){
-            if(document.getElementById(j).innerHTML.includes("<")){
-                document.getElementById(j).innerHTML = document.getElementById(j).innerHTML.replace("<",'&lt;');
-            }
-            if(document.getElementById(j).innerHTML.includes(">")){
-                document.getElementById(j).innerHTML = document.getElementById(j).innerHTML.replace(">",'&gt;');
-                
-            }
-        }
-            }
+
+            let k = document.getElementById(j);
+            let n = document.createTextNode(keys[j])
+                k.appendChild( n);
+            }}
     
 
     refresh_all();
-
+function image_change(){
+    var p = document.getElementById("p");
+    var a = p.options[p.selectedIndex].value;
+    if(a=='h'){
+        document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:invert(50);'>`;
+    }else if(a=='m'){
+        document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;'>`;
+    }else{
+        document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:grayscale()'>`;
+    }
+}
 
 
 function add_item(){
-    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2 style='color:white;'>Description</h2><input type='text' value='' id='item' placeholder='Type the task Here' autocomplete='off' required><h2 style='color:white;'>Priority<br><select id='p'><option value='h' style='background-image:url(img/m.png);'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
+    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2 style='color:white;'>Description</h2><input type='text' value='' id='item' placeholder='Type the task Here' autocomplete='off' required><h2 style='color:white;'>Priority<br><div id='p_img'><img src='img/m.png' height='35px' style='border-radius:20px;filter:invert(50);'></div><select onchange='image_change()' id='p'><option id='h'value='h' style='background-image:url(img/m.png);'>High</option><option id='m' value='m'>Medium</option><option id='l' value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
 }
 
 function added(){
     let key = document.getElementById("item").value;
-    if(key.length>25 || key.length<1){
-        var m = prompt("Enter a Text Containing 1-25 Letters","");
+    if(key.length>30 || key.length<1){
+        var m = prompt("Enter a Text Containing 1-30 Letters","");
         document.getElementById("item").value = m;
         return "";
     }
@@ -192,9 +199,9 @@ function added(){
     refresh_all();
 }
 function rem_item(k){
-
-    localStorage.removeItem(keys[k]);
+        localStorage.removeItem(keys[k]);
     refresh_all();
+    
 }
 </script>
 <button onclick="localStorage.clear();refresh_all();"><strong>Clear</strong> All</button>
