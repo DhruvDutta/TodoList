@@ -179,7 +179,7 @@ function add_item(){
 
 function added(){
     let key = document.getElementById("item").value;
-    if(key.length>25){
+    if(key.length>25 || key.length<1){
         var m = prompt("Enter a Text Containing 1-25 Letters","");
         document.getElementById("item").value = m;
         return "";
