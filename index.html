@@ -95,13 +95,13 @@
     position: absolute;
     text-align: left;
     font-family: cursive;
-    margin-left: 20px;
+    margin-left: 10px;
     margin-top: 3px;
     color: white;
-    font-size: auto;
+    font-size: 20px;
 }
 #del{
-    height: 20px;
+    height: 30px;
     border-radius: 30px;
     margin-top: 5px;
     margin-left: 5px;
@@ -144,11 +144,11 @@
             var p="";
             while ( i-- ) {
                 if(localStorage.getItem(keys[i])=="h"){
-                    p = `<img src='img/m.png' height='20px' style='border-radius:20px;filter:invert(50);'>`;
+                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;filter:invert(50);'>`;
                 }else if(localStorage.getItem(keys[i])=="m"){
-                    p = `<img src='img/m.png' height='20px' style='border-radius:20px;'>`;
+                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;'>`;
                 }else{
-                    p = `<img src='img/w.png' height='20px' style='border-radius:20px;'>`;
+                    p = `<img src='img/w.png' height='30px' style='border-radius:20px;'>`;
                 }
                 w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. ' + keys[i]} </span></div>`;
 
