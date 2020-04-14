@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dhruv's Page</title>
+    <title>Document</title>
 </head>
 <style>
     body{
@@ -97,7 +97,7 @@
     font-size: auto;
 }
 #v{
-        position: absolute;
+    position: absolute;
     float: right;
     text-align: center;
     background: rgba(0,0,0, 0.8);
@@ -142,7 +142,7 @@
     </div>
 
 <script>
-    alert=function(){};
+    alert = function(){};
         keys = Object.keys(localStorage);    
         function refresh_all() {
             keys = Object.keys(localStorage),
@@ -169,6 +169,10 @@
         for(let j = 0;j<=keys.length;j++){
             if(document.getElementById(j).innerHTML.includes("<")){
                 document.getElementById(j).innerHTML = document.getElementById(j).innerHTML.replace("<",'&lt;');
+            }
+            if(document.getElementById(j).innerHTML.includes(">")){
+                document.getElementById(j).innerHTML = document.getElementById(j).innerHTML.replace(">",'&gt;');
+                
             }
         }
             }
@@ -197,7 +201,7 @@ function rem_item(k){
     refresh_all();
 }
 </script>
-    <button onclick="localStorage.clear();refresh_all();"><strong>Clear All</strong></button>
+<button onclick="localStorage.clear();refresh_all();"><strong>Clear</strong> All</button>
 
 </body>
 </html>
