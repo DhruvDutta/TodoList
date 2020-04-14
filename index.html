@@ -86,15 +86,15 @@
     margin-top: 5px;
     text-align: left;
     background:rgba(0, 0, 0, 0.5);
-    height: 50px;
+    height: auto;
     margin-bottom: 5px;
 }
-#k{
+.k{
     text-align: left;
     font-family: cursive;
     padding-left: 20px;
     color: white;
-    font-size: 30px;
+    font-size: auto;
 }
 #v{
     float: right;
@@ -106,6 +106,8 @@
     color: white;
     font-size: 30px;
     margin-top: 5px;
+    margin-left: 5px;
+    position: absolute;
 }
 #del{
     height: 30px;
@@ -140,52 +142,60 @@
     </div>
 
 <script>
-    
-    function allStorage() {
+        keys = Object.keys(localStorage);    
+        function refresh_all() {
+            keys = Object.keys(localStorage),
+            i = keys.length;
+            var w ="";
 
-var values = [],
-    keys = Object.keys(localStorage),
-    i = keys.length;
-    var w ="";
-
-if(i>0){
-    while ( i-- ) {
-        
-        var p = "";
-        if(localStorage.getItem(keys[i])=="h"){
-            var p ="&#8648";
-        }else if(localStorage.getItem(keys[i])=="m"){
-            p="&#8593"
-        }else{
-            p="";
+        if(i>0){
+            while ( i-- ) {
+                
+                var p = "";
+                if(localStorage.getItem(keys[i])=="h"){
+                    var p ="&#8648";
+                }else if(localStorage.getItem(keys[i])=="m"){
+                    p="&#8593"
+                }else{
+                    p="";
+                }
+                w += `<div class="it"><img id='del'src='img/del.png' onclick='rem_item("${i}")'><span class="k" id = "${i}">${keys.length-i+'. ' + keys[i]} </span><span id ='v'> ${p}</span></div>`;
+            
+        }}else{
+            w="<br><h1 style='color:white;'>Add Tasks by Clicking the '+' Button";
         }
-        w += `<div class="it"><img id='del'src='img/del.png' onclick='localStorage.removeItem("${keys[i]}");allStorage();'><span id = "k">${keys.length-i}. ${keys[i]} <span id ='v'> ${p}</div>`;
-    }
-}    document.getElementById("list-items").innerHTML=w;
+        document.getElementById("list-items").innerHTML = w;
+        for(let j = 0;j<=keys.length;j++){
+            if(document.getElementById(j).innerHTML.includes("<")){
+                document.getElementById(j).innerHTML = document.getElementById(j).innerHTML.replace("<",'&lt;');
+            }
+        }
+            }
+    
 
-}
-allStorage();
-</script>
+    refresh_all();
 
 
 
-
-</center>
-<script>function add_item(){
-    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2>Description</h2><input type='text' value='' id='item'><h2>Priority<br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
+function add_item(){
+    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2>Description</h2><input type='text' value='' id='item' autocomplete='off' required><h2>Priority<br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
 }
 
 function added(){
+    let key = document.getElementById("item").value;
     var p = document.getElementById("p");
     var a = p.options[p.selectedIndex].value;
-    localStorage.setItem(document.getElementById("item").value, a);
+    localStorage.setItem(key, a);
     
     document.getElementById("main").innerHTML ="<div id='main' class='main'><div class='list'><div class='heading'><h1>Your Todo List</h1></div><div id = 'list-items' class='list-items'></div><img onclick='add_item()' class='plus' src='img/plus.png' alt='+' /></div></div>";
-    allStorage();
+    refresh_all();
 }
+function rem_item(k){
 
+    localStorage.removeItem(keys[k]);
+    refresh_all();
+}
 </script>
-
 
 </body>
 </html>
