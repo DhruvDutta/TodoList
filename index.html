@@ -148,7 +148,7 @@
                 }else if(localStorage.getItem(keys[i])=="m"){
                     p = `<img src='img/m.png' height='30px' style='border-radius:20px;'>`;
                 }else{
-                    p = `<img src='img/w.png' height='30px' style='border-radius:20px;'>`;
+                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;filter:grayscale()'>`;
                 }
                 w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. ' + keys[i]} </span></div>`;
 
