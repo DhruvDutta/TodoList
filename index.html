@@ -90,25 +90,26 @@
     height: auto;
     margin-bottom: 5px;
     border-radius: 50px;
+
 }
 .k{
     position: absolute;
     text-align: left;
     font-family: cursive;
     margin-left: 10px;
-    margin-top: 3px;
+    margin-top: 6px;
     color: white;
     font-size: 20px;
+    overflow: auto;
 }
 #del{
-    height: 30px;
+    height: 35px;
     border-radius: 30px;
     margin-top: 5px;
     margin-left: 5px;
 }
 .list-items{
-    overflow-x: hidden;
-    overflow-x: auto;
+    overflow: hidden;
 }
 </style>
 <body background="img/bg.jfif">
@@ -144,11 +145,11 @@
             var p="";
             while ( i-- ) {
                 if(localStorage.getItem(keys[i])=="h"){
-                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;filter:invert(50);'>`;
+                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:invert(50);'>`;
                 }else if(localStorage.getItem(keys[i])=="m"){
-                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;'>`;
+                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;'>`;
                 }else{
-                    p = `<img src='img/m.png' height='30px' style='border-radius:20px;filter:grayscale()'>`;
+                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:grayscale()'>`;
                 }
                 w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. ' + keys[i]} </span></div>`;
 
@@ -178,6 +179,11 @@ function add_item(){
 
 function added(){
     let key = document.getElementById("item").value;
+    if(key.length>25){
+        var m = prompt("Enter a Text Containing 1-25 Letters","");
+        document.getElementById("item").value = m;
+        return "";
+    }
     var p = document.getElementById("p");
     var a = p.options[p.selectedIndex].value;
     localStorage.setItem(key, a);
