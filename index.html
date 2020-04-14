@@ -184,7 +184,7 @@
 
 
 function add_item(){
-    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2 style="color:white;">Description</h2><input type='text' value='' id='item' autocomplete='off' required><h2 style="color:white;">Priority<br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
+    document.getElementById("main").innerHTML = "<div class='add'><div class='head1' background='img/add.jpg'><h1>Add Item</h1></div><div><h2 style="color:white;">Description</h2><input type='text' value='' id='item' placeholder="Type the task Here" autocomplete='off' required><h2 style="color:white;">Priority<br><select id='p'><option value='h'>High</option><option value='m'>Medium</option><option value='l'>Low</option></select><br></div><button type='submit' class='sub' onclick='added()'>Add</button></div>";
 }
 
 function added(){
