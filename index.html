@@ -190,15 +190,15 @@
                 var p="";
                 while ( i-- ) {
                     if(localStorage.getItem(keys[i])=="h" || localStorage.getItem(keys[i])=="H"){
-                        p = `<img id='${i}p' name='high' class="h" onclick="" src='img/m.png' height='35px' >`;
+                        p = `<img id='${i}p' name='high' class="h" onclick="mark('${i}p');" src='img/m.png' height='35px' >`;
                     }else if(localStorage.getItem(keys[i])=="m" || localStorage.getItem(keys[i])=="M"){
-                        p = `<img id='${i}p' class="m" onclick="" src='img/m.png' height='35px' >`;
+                        p = `<img id='${i}p' class="m" onclick="mark('${i}p');" src='img/m.png' height='35px' >`;
                     }else if(localStorage.getItem(keys[i])=="l" || localStorage.getItem(keys[i])=="L"){
-                        p = `<img id='${i}p' class="l" onclick="" src='img/m.png' height='35px' >`;
+                        p = `<img id='${i}p' class="l" onclick="mark('${i}p');" src='img/m.png' height='35px' >`;
                     }else{
                         
                     }
-                    w += `<div class="it" ondblclick="mark('${i}p');"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'><span id='sp'>&nbsp;<span>${p}<span class="k" id = "${i}">${keys.length-i+'. '} </span></div>`;
+                    w += `<div class="it" ><img id='del'src='img/dele.png' onclick='rem_item("${i}")'><span id='sp'>&nbsp;<span>${p}<span class="k" id = "${i}">${keys.length-i+'. '} </span></div>`;
                     
                 }
             }
