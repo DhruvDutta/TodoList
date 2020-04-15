@@ -32,6 +32,7 @@
     background-position: 0px;
     height: 60px;
     font-size: 17px;
+    
 
 }
 .plus{
@@ -77,6 +78,8 @@
     font-size: 20px;
     border-radius: 10px;
     background-color: aqua;
+    user-select: none;
+    margin-right: 10px;
 }
 #p{
     height: 30px;
@@ -90,6 +93,7 @@
     height: auto;
     margin-bottom: 5px;
     border-radius: 50px;
+    
 
 }
 .k{
@@ -101,80 +105,128 @@
     color: white;
     font-size: 15px;
     overflow: auto;
+    user-select: none;
 }
 #del{
     height: 35px;
     border-radius: 30px;
     margin-top: 5px;
-    margin-left: 5px;
+    margin-left: 10px;
+    user-select: none;
 }
 .list-items{
     overflow: hidden;
 }
+.h{
+    border-radius:20px;filter:invert(50);
+    user-select: none;
+}
+.m{
+    border-radius:20px;
+    user-select: none;
+}
+.l{
+    border-radius:20px;filter:grayscale();
+    user-select: none;
+}
+#sp{
+    user-select: none;
+}
 
 </style>
 <body background="img/bg.jfif">
-<center>
+    <div id="loading">
+        <h1>
+            
+        </h1>
+    </div>
+<center id="page">
     <div id="main" class="main">
         
-        <div class="list">
-            
-            <div class="heading">
-                <h1>Your Todo List</h1>
-            </div>
-        
-
-
-            <div id = "list-items" class="list-items">
-
-            </div>
-            
-            
-            <img onclick="add_item()" class="plus" src="img/plus.png" alt="+" />
-        </div>
     </div>
 
 <script>
-    
-        keys = Object.keys(localStorage);    
+        keys = Object.keys(localStorage); 
+        var path;
+        var pstyle;
+        var pc;
+        function mark(li){
+            
+            let z = document.getElementById(li);
+            if(String(z.src).slice(-5,-1)+String(z.src).slice(-1) !="t.png"){
+            path = String(z.src).slice(-5,-1)+String(z.src).slice(-1);
+            pstyle= z.style;
+                z.src= String(z.src).slice(0,-5)+"t.png";
+                z.style = "height: 35px;border-radius: 30px;";
+                pc= z.className;
+                z.className = "";
+                var txt = document.getElementById(li.charAt(0));
+                txt.style = "text-decoration: line-through;";
+                localStorage.setItem(keys[li.charAt(0)],String(localStorage.getItem(keys[li.charAt(0)])).toUpperCase());
+                
+            }else{
+                unmark(li);
+            }
+            
+            }
+            
+            
+        
+        function unmark(li){
+            let z= document.getElementById(li);
+            z.src = String(z.src).slice(0,-5)+path;
+            z.className=pc;
+            document.getElementById(li.charAt(0)).style.textDecoration = "";
+
+        }
+
+
         function refresh_all() {
+            document.getElementById("main").innerHTML ="<div id='main' class='main'><div class='list'><div class='heading'><h1>Your Todo List</h1></div><div id = 'list-items' class='list-items'></div><img onclick='add_item()' class='plus' src='img/plus.png' alt='+' /></div></div>";
             keys = Object.keys(localStorage),
             i = keys.length;
             var w ="";
-
-        if(i>0){
-            var p="";
-            while ( i-- ) {
-                if(localStorage.getItem(keys[i])=="h"){
-                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:invert(50);'>`;
-                }else if(localStorage.getItem(keys[i])=="m"){
-                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;'>`;
-                }else{
-                    p = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:grayscale()'>`;
+            if(i>0){
+                var p="";
+                while ( i-- ) {
+                    if(localStorage.getItem(keys[i])=="h" || localStorage.getItem(keys[i])=="H"){
+                        p = `<img id='${i}p' name='high' class="h" onclick="" src='img/m.png' height='35px' >`;
+                    }else if(localStorage.getItem(keys[i])=="m" || localStorage.getItem(keys[i])=="M"){
+                        p = `<img id='${i}p' class="m" onclick="" src='img/m.png' height='35px' >`;
+                    }else if(localStorage.getItem(keys[i])=="l" || localStorage.getItem(keys[i])=="L"){
+                        p = `<img id='${i}p' class="l" onclick="" src='img/m.png' height='35px' >`;
+                    }else{
+                        
+                    }
+                    w += `<div class="it" ondblclick="mark('${i}p');"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'><span id='sp'>&nbsp;<span>${p}<span class="k" id = "${i}">${keys.length-i+'. '} </span></div>`;
+                    
                 }
-                w += `<div class="it"><img id='del'src='img/dele.png' onclick='rem_item("${i}")'>&nbsp;${p}<span class="k" id = "${i}">${keys.length-i+'. '} </span></div>`;
-                
-        }}else{
-            w="<br><h1 style='color:white;'>Add Tasks by Clicking the '+' Button";
-        }
-        document.getElementById("list-items").innerHTML = w;
-        for(let j = 0;j<=keys.length;j++){
+            }
+            else{
+                w="<br><h1 style='color:white;'>Add Tasks by Clicking the '+' Button";
+            }
+            document.getElementById("list-items").innerHTML = w;
+            for(let j = 0;j<keys.length;j++){
 
-            let k = document.getElementById(j);
-            let n = document.createTextNode(keys[j])
-                k.appendChild( n);
-            }}
+                let k = document.getElementById(j);
+                let n = document.createTextNode(keys[j])
+                    k.appendChild(n);
+                if(String(localStorage.getItem(keys[j])).toUpperCase() == String(localStorage.getItem(keys[j]))){
+                    mark(j+"p");
+                }
+            }
+        }
     
 
     refresh_all();
 function image_change(){
     var p = document.getElementById("p");
     var a = p.options[p.selectedIndex].value;
-    if(a=='h'){
+    if(a.charAt(0)=='h'){
         document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:invert(50);'>`;
-    }else if(a=='m'){
+    }else if(a.charAt(0)=='m'){
         document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;'>`;
-    }else{
+    }else if(a.charAt(0)=='l'){
         document.getElementById("p_img").innerHTML = `<img src='img/m.png' height='35px' style='border-radius:20px;filter:grayscale()'>`;
     }
 }
@@ -195,7 +247,6 @@ function added(){
     var a = p.options[p.selectedIndex].value;
     localStorage.setItem(key, a);
     
-    document.getElementById("main").innerHTML ="<div id='main' class='main'><div class='list'><div class='heading'><h1>Your Todo List</h1></div><div id = 'list-items' class='list-items'></div><img onclick='add_item()' class='plus' src='img/plus.png' alt='+' /></div></div>";
     refresh_all();
 }
 function rem_item(k){
@@ -204,7 +255,6 @@ function rem_item(k){
     
 }
 </script>
-
-
+</center>
 </body>
 </html>
