@@ -175,7 +175,7 @@
         function unmark(li){
             let z= document.getElementById(li);
             z.src = String(z.src).slice(0,-5)+path;
-            z.className=pc;
+            z.className=String(localStorage.getItem(keys[String(li.charAt(0)).toLowerCase()])).toLowerCase();
             document.getElementById(li.charAt(0)).style.textDecoration = "";
 
         }
@@ -203,7 +203,7 @@
                 }
             }
             else{
-                w="<br><h1 style='color:white;'>Add Tasks by Clicking the '+' Button";
+                w="<br><h1 style='color:white;'>1. Add Tasks by Clicking the '+' Button<br>2. Click on the priority icon to mark completed task";
             }
             document.getElementById("list-items").innerHTML = w;
             for(let j = 0;j<keys.length;j++){
