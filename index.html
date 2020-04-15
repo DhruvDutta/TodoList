@@ -177,6 +177,8 @@
             z.src = String(z.src).slice(0,-5)+path;
             z.className=String(localStorage.getItem(keys[String(li.charAt(0)).toLowerCase()])).toLowerCase();
             document.getElementById(li.charAt(0)).style.textDecoration = "";
+            localStorage.setItem(keys[li.charAt(0)],String(localStorage.getItem(keys[li.charAt(0)])).toLowerCase());
+
 
         }
 
